@@ -212,12 +212,14 @@ func timeInfluxRequest(e *State, T miniprofiler.Timer, db, query, startDuration,
 				return nil, fmt.Errorf("influx: expected one result")
 			}
 			r := res.Results[0]
+            fmt.Println(r)
 			return r.Series, r.Err
 		}
 		var val interface{}
 		var ok bool
 		val, err = e.Cache.Get(q, getFn)
 		if s, ok = val.([]influxModels.Row); !ok {
+            fmt.Println([]influxModels.Row)
 			err = fmt.Errorf("influx: did not get a valid result from InfluxDB")
 		}
 	})
